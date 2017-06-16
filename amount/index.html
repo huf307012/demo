@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>小数点限制</title>
+    <meta content="app-id=518966501" name="apple-itunes-app" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+</head>
+
+<body>
+    <div class="bd">
+    <form id="itemForm" onsubmit="return false">
+        <div class="cont">
+            <div class="on1">
+                两位小数：<input class="js_type" class="price" field="price" name="price" type="number" step="0.01" placeholder="0">
+                正整数：<input class="js_stock" class="price" field="price" name="price" type="tel" placeholder="0">
+            </div>
+        </div>
+    </form>    
+    </div>
+    <script src="http://zeptojs.com/zepto.min.js"></script> 
+    <script src="amount_input.js"></script>
+</body>
+<script>
+var cont={
+    init: function(){
+        this.item_price();
+    }, 
+    item_price: function() {    
+        amountInput("#itemForm",".js_type");
+        //限定为正整数
+        $("#itemForm").on("keyup",".js_stock",function(){
+            var num = this.value.replace(/[^\d]/g,'');
+            console.log(this.value);
+            if(num === ''){
+                this.value = '';
+                return;
+            }else{
+                this.value = parseInt(num);
+            }           
+        });
+    },
+}
+$(document).ready(function(){
+    cont.init();
+})
+</script>
+
+</html>
